@@ -1,1 +1,1 @@
-# Competetive-Machine-Learning-Contests
+# Competetive-Machine-Learning
