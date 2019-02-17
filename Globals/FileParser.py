@@ -6,5 +6,5 @@ class FileParser:
 
     @staticmethod
     def readFile(filePath):
-        print("in the fileParser")
+        print("in the fileParser" + filePath)
         return 1
