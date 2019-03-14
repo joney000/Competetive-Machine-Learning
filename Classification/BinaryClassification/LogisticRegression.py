@@ -11,7 +11,7 @@ from scipy import ndimage
 import numpy as np
 from Globals.FileParser import FileParser
 from Globals.Preprocessor import Preprocessor
-
+from Globals.Utils import Utils
 
 """
 author:    Jaswant Singh [developer.jaswant@gmail.com]
@@ -38,9 +38,8 @@ class LogisticRegression:
         assert (isinstance(bias, float) or isinstance(bias, int))
         return weight, bias
 
-    def sigmoid(self, z):
-        s = 1. / (1 + np.exp(-z))
-        return s
+    def activation(self, z):
+        return Utils.sigmoid_activation(z)
 
     def propagate(self, w, b, X, Y):
         """
@@ -62,7 +61,7 @@ class LogisticRegression:
         m = X.shape[1]
 
         # FORWARD PROPAGATION (FROM X TO COST)
-        A = self.sigmoid(np.dot(X.T, w) + b).T  # compute activation
+        A = self.activation(np.dot(X.T, w) + b).T  # compute activation
         cost = -1.0 / m * np.sum(Y * np.log(A) + (1 - Y) * np.log(1 - A))  # compute cost
 
         # BACKWARD PROPAGATION (TO FIND GRAD)
@@ -138,7 +137,7 @@ class LogisticRegression:
         Y_prediction = np.zeros((1, m))
         w = w.reshape(X.shape[0], 1)
         # Computed vector "A" predicting the probabilities of a cat being present in the picture
-        A = self.sigmoid(np.dot(X.T, w) + b).T
+        A = self.activation(np.dot(X.T, w) + b).T
 
         for i in range(A.shape[1]):
             Y_prediction[0][i] = 1 if A[0][i] >= 0.5 else 0
