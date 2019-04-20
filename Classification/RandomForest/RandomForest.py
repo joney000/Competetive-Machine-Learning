@@ -173,10 +173,7 @@ class RandomForest:
   # Make a prediction with a list of bagged trees
   def bagging_predict(self, trees, row):
     predictions = [self.predict(tree, row) for tree in trees]
-    return max(set(predictions), key=predictions.count)
-
-class RandomForestModelParameters:
-  def __init__(self, ):
+    return max(set(predictions), key=predictions.count) 
   
 def runAlgorithm():
   # load and prepare data
